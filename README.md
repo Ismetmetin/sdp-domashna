@@ -2,3 +2,5 @@
 Тема: Линейни структури от данни
 
 Условие(ако оцелее): https://docs.google.com/document/d/1ZGcg3X3a8JR7kFfECtf_wIsjMMcEaRvYzZfuXxOM9Io/edit?tab=t.0
+
+(да за смях е)
