@@ -1,11 +1,5 @@
 #include "lib.h"
 
-/*
-    char *baseCurrency;
-    std::vector<std::string> currencyNames;
-    std::vector<std::vector<float>> currencyData;
-    std::vector<time_t> dates;
-*/
 time_t exchange_rates::parseDateTime(const char *datetimeString)
 {
     struct std::tm tm = {};
@@ -140,23 +134,6 @@ void exchange_rates::from_csv(const char *path, const char *base_currency)
 
     mergeSort(newCurrencyNames, newCurrencyData, 0, newCurrencyNames.size() - 1);
 
-    // for (size_t i = 0; i < newNameCount - 1; ++i)
-    // {
-    //     for (size_t j = 0; j < newNameCount - 1 - i; ++j)
-    //     {
-    //         if (newCurrencyNames[j].compare(newCurrencyNames[j + 1]) > 0)
-    //         {
-    //             std::string tempName = newCurrencyNames[j];
-    //             newCurrencyNames[j] = newCurrencyNames[j + 1];
-    //             newCurrencyNames[j + 1] = tempName;
-
-    //             std::vector<float> tempVector = newCurrencyData[j];
-    //             newCurrencyData[j] = newCurrencyData[j + 1];
-    //             newCurrencyData[j + 1] = tempVector;
-    //         }
-    //     }
-    // } 
-
     baseCurrency = new char[4];
     for (size_t i = 0; i < 3; ++i)
     {
@@ -187,8 +164,8 @@ void merge(std::vector<std::string> &currencyNames, std::vector<std::vector<floa
 
     for (int j = 0; j < n2; j++)
     {
-        subArrNames2[j] = currencyNames[left + j];
-        subArrCurr2[j] = currencyData[left + j];
+        subArrNames2[j] = currencyNames[mid + j + 1];
+        subArrCurr2[j] = currencyData[mid + j + 1];
     }
 
     int i = 0;
@@ -197,8 +174,8 @@ void merge(std::vector<std::string> &currencyNames, std::vector<std::vector<floa
 
     while (i < n1 && j < n2)
     {
-        if (currencyNames[j].compare(currencyNames[j + 1]) > 0)
-        {
+        if (subArrNames1[i].compare(subArrNames2[j]) < 0)
+        { 
             currencyNames[k] = subArrNames1[i];
             currencyData[k] = subArrCurr1[i];
             i++;
@@ -207,7 +184,7 @@ void merge(std::vector<std::string> &currencyNames, std::vector<std::vector<floa
         else
         {
             currencyNames[k] = subArrNames2[j];
-            currencyData[k] = subArrCurr1[j];
+            currencyData[k] = subArrCurr2[j];
             j++;
             k++;
         }
@@ -216,7 +193,7 @@ void merge(std::vector<std::string> &currencyNames, std::vector<std::vector<floa
     while (i < n1)
     {
         currencyNames[k] = subArrNames1[i];
-        currencyData[k] = subArrCurr1[i];
+        currencyData[k] = subArrCurr1[i]; //в тази версия даже съм го поправил
         i++;
         k++;
     }
@@ -224,7 +201,7 @@ void merge(std::vector<std::string> &currencyNames, std::vector<std::vector<floa
     while (j < n2)
     {
         currencyNames[k] = subArrNames2[j];
-        currencyData[k] = subArrCurr1[j];
+        currencyData[k] = subArrCurr2[j]; //тук също
         j++;
         k++;
     }
