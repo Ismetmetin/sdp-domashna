@@ -1,6 +1,5 @@
 #include "lib.h"
 //#include "lib.cpp"
-// /home/ismet/Downloads/fldr/mqu.csv
 
 int main(int argc, char *argv[])
 {
